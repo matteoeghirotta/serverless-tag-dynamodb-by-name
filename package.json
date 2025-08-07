@@ -1,0 +1,13 @@
+{
+  "name": "serverless-tag-dynamodb-by-name",
+  "version": "1.0.0",
+  "description": "Serverless plugin tag dynamodb",
+  "main": "index.js",
+  "peerDependencies": {
+    "serverless": "3.x"
+  },
+  "engines": {
+    "node": ">=10.0"
+  },
+  "license": "MIT"
+}

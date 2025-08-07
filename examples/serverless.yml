@@ -1,0 +1,63 @@
+frameworkVersion: "3"
+
+plugins:
+  - serverless-tag-dynamodb-by-name
+
+service: ${self:custom.projectId}
+configValidationMode: error
+
+custom:
+  projectId: example-serverless-tag-dynamodb-by-name
+  resourceTagName:
+    prefix: ${self:service}:Name
+
+provider:
+  name: aws
+  stage: ${opt:stage, "dev"}
+  region: eu-west-1
+  stackName: ${self:service}-${self:provider.stage}
+  deploymentBucket:
+    name: sls-mado-deploy-dev
+  stackTags:
+    Name: ${self:service}
+    Environment: ${self:provider.stage}
+    cost-center: ${self:custom.projectId}
+  tags:
+    Name: ${self:service}
+    Environment: ${self:provider.stage}
+    cost-center: ${self:custom.projectId}
+  runtime: nodejs20.x
+  memorySize: 512
+  timeout: 60
+
+resources:
+  Resources:
+    PagesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: "PAY_PER_REQUEST"
+        AttributeDefinitions:
+          - AttributeName: "url"
+            AttributeType: "S"
+        TableName: ${self:provider.stage}_${self:custom.projectId}_pages
+        KeySchema:
+          - KeyType: "HASH"
+            AttributeName: "url"
+    Pages2Table:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: "PAY_PER_REQUEST"
+        AttributeDefinitions:
+          - AttributeName: "url"
+            AttributeType: "S"
+        TableName: ${self:provider.stage}_${self:custom.projectId}_pages2
+        KeySchema:
+          - KeyType: "HASH"
+            AttributeName: "url"
+    MyQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: ${self:provider.stage}_${self:custom.projectId}_queue.fifo
+        FifoQueue: true
+        VisibilityTimeout: 240
+        ContentBasedDeduplication: true
