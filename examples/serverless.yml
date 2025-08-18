@@ -8,8 +8,7 @@ configValidationMode: error
 
 custom:
   projectId: example-serverless-tag-dynamodb-by-name
-  resourceTagName:
-    prefix: ${self:service}:Name
+  dynamodbTableTagName: ${self:service}:Name
 
 provider:
   name: aws
