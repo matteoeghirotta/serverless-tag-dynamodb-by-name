@@ -6,10 +6,10 @@ table.
 
 ## plugin configuration
 
-This plugin must be configured with a `dynamodbTableTagName` property in the custom section,
-specifying a string argumente with the name of the tag Key property to which the table name
+This plugin must be configured with a `dynamodbTableTagName` property in the `custom` section,
+specifying a string argument with the name of the tag `Key` property to which the table name
 will be assigned,
-as in the example [serverless.yml](./exmples/serverless.yml), e.g.:
+as in the example [serverless.yml](./examples/serverless.yml), e.g.:
 
 ```yml
 custom:
