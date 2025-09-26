@@ -1,7 +1,7 @@
 # serverless-tag-dynamodb-by-name
 
 This plugin assigns a tag with customizable `Key` property containing the table name to all DynamoDB
-tables deployed in the stack. This is useful to track the AWS costs associated each DynamoDB
+tables deployed in the stack. This is useful to track the AWS costs associated with each DynamoDB
 table.
 
 ## plugin configuration
